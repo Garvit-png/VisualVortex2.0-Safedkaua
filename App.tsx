@@ -4,9 +4,22 @@ import { Sidebar } from './components/Sidebar';
 import { TopBar } from './components/TopBar';
 import { MainDashboard } from './components/MainDashboard';
 import { RightPanel } from './components/RightPanel';
+import { EventsPage } from './components/EventsPage';
+import { FullCalendarPage } from './components/FullCalendarPage';
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState('Home');
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'Events':
+        return <EventsPage setActiveTab={setActiveTab} />;
+      case 'Calendar':
+        return <FullCalendarPage />;
+      default:
+        return <MainDashboard />;
+    }
+  };
 
   return (
     <div className="flex h-screen w-full bg-[#f8f9fa] overflow-hidden text-slate-700">
@@ -20,11 +33,11 @@ const App: React.FC = () => {
         <div className="flex flex-1 overflow-hidden">
           {/* Main Content Area */}
           <main className="flex-1 overflow-y-auto p-6 min-w-0">
-            <MainDashboard />
+            {renderContent()}
           </main>
           
-          {/* Right Sidebar - Fixed Info Panel */}
-          <RightPanel />
+          {/* Right Sidebar - Fixed Info Panel - Only shown on Home */}
+          {activeTab === 'Home' && <RightPanel setActiveTab={setActiveTab} />}
         </div>
       </div>
     </div>

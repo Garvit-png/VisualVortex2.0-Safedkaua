@@ -2,7 +2,11 @@
 import React from 'react';
 import { ArrowRight, Calendar as CalendarIcon, Clock } from 'lucide-react';
 
-export const RightPanel: React.FC = () => {
+interface RightPanelProps {
+  setActiveTab?: (tab: string) => void;
+}
+
+export const RightPanel: React.FC<RightPanelProps> = ({ setActiveTab }) => {
   const schedule = [
     {
       date: '19',
@@ -83,7 +87,10 @@ export const RightPanel: React.FC = () => {
               <h3 className="text-lg font-bold text-slate-800">Calendar</h3>
               <p className="text-[11px] text-slate-400 font-medium">Your schedule for the next days</p>
             </div>
-            <button className="flex items-center text-xs font-bold text-slate-600 hover:text-slate-900 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-100">
+            <button 
+              onClick={() => setActiveTab?.('Calendar')}
+              className="flex items-center text-xs font-bold text-slate-600 hover:text-slate-900 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-100 transition-colors"
+            >
               View
               <CalendarIcon className="w-3.5 h-3.5 ml-2" />
             </button>
