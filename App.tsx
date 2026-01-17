@@ -1,0 +1,34 @@
+
+import React, { useState } from 'react';
+import { Sidebar } from './components/Sidebar';
+import { TopBar } from './components/TopBar';
+import { MainDashboard } from './components/MainDashboard';
+import { RightPanel } from './components/RightPanel';
+
+const App: React.FC = () => {
+  const [activeTab, setActiveTab] = useState('Home');
+
+  return (
+    <div className="flex h-screen w-full bg-[#f8f9fa] overflow-hidden text-slate-700">
+      {/* Sidebar - Fixed Left */}
+      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+      
+      {/* Right side container */}
+      <div className="flex-1 flex flex-col min-w-0">
+        <TopBar />
+        
+        <div className="flex flex-1 overflow-hidden">
+          {/* Main Content Area */}
+          <main className="flex-1 overflow-y-auto p-6 min-w-0">
+            <MainDashboard />
+          </main>
+          
+          {/* Right Sidebar - Fixed Info Panel */}
+          <RightPanel />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default App;
